@@ -68,7 +68,7 @@ const App = () => {
       onCommand: async ({ command, articles,number, Weather}) => {
         // for "newHeadline" Command to fetching the news on user request
         if (command === 'newHeadline') {
-          console.log(articles);
+          // console.log(articles);
           setNewsArticles(articles)
           setActiveArticle(-1)
           setweatherUpdate()
@@ -87,13 +87,14 @@ const App = () => {
           // logic for converting the words into numbers through words-to-numbers library
           const parsedNumber = wordToNumbers(number, { fuzzy: true })
           const article = articles[parsedNumber - 1];
-          console.log(article)
+          // console.log(article)
           setSummary()
           setweatherUpdate()
 
           // if article available then open the article in new tab
           if (article) {
-            window.open(article.link, "_blank")
+            let articleLink = article.link?article.link:article.url
+            window.open(articleLink, "_blank")
           }
           // console.log(parsedNumber);
 
@@ -102,8 +103,9 @@ const App = () => {
         //     // for "weather" Command to show the weather updates on user request
         else if (command === 'weather') {
           setweatherUpdate(Weather)
+          window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
           setSummary()
-          console.log(Weather)
+          // console.log(Weather)
         }
 
         //     // for "Summarizer" Command to summarize the article on user request
@@ -115,13 +117,13 @@ const App = () => {
           // logic for converting the words into numbers using word-to-numbers library
           const parsedNumber = wordToNumbers(number, { fuzzy: true })
           const article = await articles[parsedNumber - 1];
-          // console.log({articles,article})
 
           // If article available that is requested by user the summarize the article
           if (article) {
-            console.log(article.link)
+            // console.log(article.link)
             setSummary(article)
-            await handleSummary(article.link)
+            let articleLink = article.link?article.link:article.url
+            await handleSummary(articleLink)
           }
 
         }
@@ -129,7 +131,7 @@ const App = () => {
     })
   }, []);
 
-  console.log(newsArticles);
+  // console.log(newsArticles);
 
   return (
     <>

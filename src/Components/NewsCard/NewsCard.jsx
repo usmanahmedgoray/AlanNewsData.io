@@ -46,10 +46,10 @@ const useStyles = createUseStyles({
 });
 
 
-const NewsCard = ({ article: { description, pubDate, source_id, title, link, image_url
-}, i, activeArticle }) => {
-
-  console.log(description)
+const NewsCard = ({ article, i, activeArticle }) => {
+  
+  let imageURL =  article.image_url || article.urlToImage
+  // console.log(imageURL)
 
   // Declare the useState Hook
   const [elRefs, setElRefs] = useState([]);
@@ -77,16 +77,15 @@ const NewsCard = ({ article: { description, pubDate, source_id, title, link, ima
   return (
 
     <Card ref={elRefs[i]} className={classNames(classes.card, activeArticle === i ? classes.activeCard : null)}>
-      <CardActionArea href={link} target="_blank" >
-        <CardMedia className={classes.media} image={image_url
-          || "https://www.niddk.nih.gov/-/media/Images/Components/Default-Social-Media-Images/News-Card.png"} />
+      <CardActionArea href={article.link || article.url} target="_blank" >
+        <CardMedia className={classes.media} image={imageURL || "https://www.niddk.nih.gov/-/media/Images/Components/Default-Social-Media-Images/News-Card.png"} />
         <div className={classes.details} >
-          <Typography variant='body2' color="textSecondary" component="h2" >{(new Date(pubDate)).toDateString()}</Typography>
-          <Typography variant='body2' color="textSecondary" component="h2" >{source_id}</Typography>
+          <Typography variant='body2' color="textSecondary" component="h2" >{(new Date(article.pubDate || article.publishedAt)).toDateString()}</Typography>
+          <Typography variant='body2' color="textSecondary" component="h2" >{article.source_id || article.source.name}</Typography>
         </div>
-        <Typography className={classes.title} gutterBottom variant="h5" component="h5" >{title}</Typography>
+        <Typography className={classes.title} gutterBottom variant="h5" component="h5" >{article.title}</Typography>
         <CardContent >
-          <Typography variant="body2" color="textSecondary" component="p">{description}</Typography>
+          <Typography variant="body2" color="textSecondary" component="p">{article.description}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.cardActions}>

@@ -44,7 +44,6 @@ const Styles = {
 
 const NewsCards = ({ articles,activeArticle }) => {
     // If there is no article length then return these cards 
-    console.log(articles)
   if (!articles.length) {
     return (
       <Grow in>
