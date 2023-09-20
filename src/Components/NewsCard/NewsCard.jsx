@@ -48,7 +48,7 @@ const useStyles = createUseStyles({
 
 const NewsCard = ({ article, i, activeArticle }) => {
   
-  let imageURL =  article.image_url || article.urlToImage
+  let imageURL =  article.image_url || article.image
   // console.log(imageURL)
 
   // Declare the useState Hook

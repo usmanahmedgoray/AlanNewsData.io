@@ -7,7 +7,7 @@ import { Triangle } from "react-loader-spinner";
 
 const Summarizer = ({ Summary, ArticleSummary }) => {
 
-    let imageUrl = Summary.image_url || Summary.urlToImage
+    let imageUrl = Summary.image_url || Summary.image
     const modalRef = useRef();
     useEffect(() => {
         modalRef.current.classList.remove('hidden')
